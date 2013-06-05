@@ -1,0 +1,12 @@
+<h1>Books</h1>
+
+ <table>
+   <% @books.each do |book| %>
+     <tr>
+       <td><%= book.title %></td>
+       <td><img src="http://covers.openlibrary.org/b/isbn/<%= book.isbn10 %>-M.jpg" />
+     </tr>
+   <% end %>
+ </table>
+
+ <br />
