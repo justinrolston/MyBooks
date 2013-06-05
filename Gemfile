@@ -9,6 +9,8 @@ gem 'rspec-rails'
 gem 'sqlite3'
 gem 'activeadmin'
 gem "meta_search",    '>= 1.1.0.pre'
+gem 'therubyracer'
+gem "less-rails"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -20,6 +22,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'twitter-bootstrap-rails'
 end
 
 gem 'jquery-rails', "2.3.0"
