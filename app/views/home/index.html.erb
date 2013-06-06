@@ -1,10 +1,22 @@
-<h1>Books</h1>
-
- <table class="table table-striped">
-   <% @books.each do |book| %>
-     <tr>
-       <td><%= book.title %></td>
-       <td><img src="http://covers.openlibrary.org/b/isbn/<%= book.isbn10 %>-S.jpg" />
-     </tr>
-   <% end %>
- </table>
+<div class="row">
+  <div class="span8">
+    <h1>Books</h1>
+    <table class="table table-striped">
+      <% @books.each do |book| %>
+        <tr>
+          <td>
+            <p class="text-left">
+            <dl class="dl-horizontal">
+              <dt>Title:</dt>
+              <dd><strong><%= book.title %></strong></dd>
+              <dt>Author:</dt>
+              <dd><%= book.author %><dd>
+            </dl>
+            </p>
+            <p class="text-right"><img class="img-polaroid" src="http://covers.openlibrary.org/b/isbn/<%= book.isbn10 %>-M.jpg" /></p>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
