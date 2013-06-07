@@ -18,6 +18,6 @@
         </tr>
       <% end %>
     </table>
-    <%= will_paginate @books %>
+    <%= will_paginate @books, :renderer => BootstrapPagination::Rails %>
   </div>
 </div>
