@@ -1,7 +1,7 @@
 class Book < ActiveRecord::Base
   attr_accessible :author, :description, :isbn10, :isbn13, :title, :title_long
 
-  self.per_page = 3
+  self.per_page = 5
 
   def import_openlibrary_data( data)
     self.title = data.title unless data.title.nil?
