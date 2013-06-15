@@ -1,6 +1,15 @@
 require 'openlibrary'
 
 ActiveAdmin.register Book do
+  index do
+    column :title
+    column do |book|
+      link_to image_tag(book.small_image)
+    end
+    column :isbn10
+    column :isbn13
+    default_actions
+  end
   form do |f|
     f.inputs do
       if f.object.new_record?
