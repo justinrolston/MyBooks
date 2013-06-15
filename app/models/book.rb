@@ -8,27 +8,34 @@ class Book < ActiveRecord::Base
 
   def import_openlibrary_data( data)
     self.title = data.title unless data.title.nil?
+    self.subtitle = data.subtitle
+    import_author data
+    import_isbn data
+    import_images data
+    self
+  end
+
+  private
+  def import_isbn data
+    self.isbn10 = data.identifiers['isbn_10'].first unless data.identifiers['isbn_10'].nil?
+    self.isbn13 = data.identifiers['isbn_13'].first unless data.identifiers['isbn_13'].nil?
+  end
+
+  def import_images data
+    self.small_image = data.cover["small"] unless data.cover["small"].nil?
+    self.medium_image = data.cover["medium"] unless data.cover["medium"].nil?
+    self.large_image = data.cover["large"] unless data.cover["large"].nil?
+  end
+
+  def import_author data
     unless data.authors.nil?
       @name = data.authors.first['name']
       @author = Author.find_by_name(@name)
-      binding.pry
       if @author.nil?
         self.build_author(:name => @name )
       else
         self.author = @author
       end
     end
-    self.subtitle = data.subtitle
-    self.isbn10 = data.identifiers['isbn_10'].first unless data.identifiers['isbn_10'].nil?
-    self.isbn13 = data.identifiers['isbn_13'].first unless data.identifiers['isbn_13'].nil?
-    import_images data
-    self
-  end
-
-  private
-  def import_images data
-    self.small_image = data.cover["small"] unless data.cover["small"].nil?
-    self.medium_image = data.cover["medium"] unless data.cover["medium"].nil?
-    self.large_image = data.cover["large"] unless data.cover["large"].nil?
   end
 end

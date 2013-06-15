@@ -19,11 +19,11 @@
               <dt>Title:</dt>
               <dd><strong><%= book.title %></strong></dd>
               <dt>Author:</dt>
-              <dd><%= book.author %></dd>
+              <dd><%= book.author.name %></dd>
             </dl>
           </td>
           <td>
-              <img class="img-polaroid" src="http://covers.openlibrary.org/b/isbn/<%= book.isbn10 %>-S.jpg" />
+              <img class="img-polaroid" src="<%= book.small_image %>" />
           </td>
         </tr>
       <% end %>
