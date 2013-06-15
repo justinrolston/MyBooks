@@ -28,7 +28,9 @@ class Book < ActiveRecord::Base
   end
 
   def import_author data
-    unless data.authors.nil?
+    if data.authors.nil?
+      self.author = Author.find_by_name('N/A')
+    else
       @name = data.authors.first['name']
       @author = Author.find_by_name(@name)
       if @author.nil?
