@@ -31,20 +31,11 @@ ActiveAdmin.register Book do
       @book = Book.new()
       data = Openlibrary::Data
       book_details = data.find_by_isbn(params[:book][:isbn])
-      if book_details.nil?
-        respond_to do |f|
-          f.html { flash[:alert] = 'Cannot find book'
-                   render action: "new"}
-        end
+      @book.import_openlibrary_data(book_details)
+      if @book.save
+        redirect_to :action => 'edit', :id => @book.id, notice: "Book was Created" 
       else
-        @book.import_openlibrary_data(book_details)
-        respond_to do |f|
-          if @book.save
-            f.html { redirect_to :admin_books, notice: "Book was Created" }
-          else
-            f.html {render action: "new" }
-          end
-        end
+        render action: "new" 
       end
     end
   end

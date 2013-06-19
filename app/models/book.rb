@@ -7,11 +7,15 @@ class Book < ActiveRecord::Base
   self.per_page = 5
 
   def import_openlibrary_data( data)
-    self.title = data.title unless data.title.nil?
-    self.subtitle = data.subtitle
-    import_author data
-    import_isbn data
-    import_images data
+    unless data.nil?
+      self.title = data.title unless data.title.nil?
+      self.subtitle = data.subtitle
+      import_author data
+      import_isbn data
+      import_images data
+    else
+      self.author = Author.find_by_name('N/A')
+    end
     self
   end
 
